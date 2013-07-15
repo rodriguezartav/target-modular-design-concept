@@ -11,14 +11,14 @@
     "eco" : "*",
     "less": "*",
     "coffee-script" : "*",
-    "fast-detective" : "*"
+    "fast-detective" : "*",
+    "jqueryify" : "*",
+    "spine" : "*"
   },
   "devDependencies":{
     "mocha" : "*",
     "should" : "*",
     "supertest" : "*",
-    "superagent" : "*",
-    "jqueryify" : "*",
-    "spine" : "*"
+    "superagent" : "*"
   }
 }
