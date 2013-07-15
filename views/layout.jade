@@ -1,0 +1,26 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/application.css?path=css/', type='text/css', charset='utf-8')
+    meta(name="viewport", content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no")
+    script(src="/application.js?dependencies=jqueryify,spine&apps=app/shared")
+
+    script.
+      var jQuery  = require("jqueryify");
+      var exports = this;
+      jQuery(function(){
+        LazyLoad = require("lib/lazyLoad")
+        windowSize = $(window).width()
+        LazyLoad.js("/application.js?width=" + windowSize, function() {
+           var App = require("index");
+           exports.app = new App({el: $("body")});
+        });
+        
+        
+      });
+
+  body
+    block content
+    
+    
