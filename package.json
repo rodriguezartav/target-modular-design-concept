@@ -1,24 +1,47 @@
 {
-  "name": "application-name",
+  "name": "appbot-compiler",
   "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "start": "node app.js"
-  },
+  "lib": "./lib./index.js",
   "dependencies": {
-    "express": "3.3.1",
-    "jade": "*",
-    "eco" : "*",
-    "less": "*",
-    "coffee-script" : "*",
-    "fast-detective" : "*",
-    "jqueryify" : "*",
-    "spine" : "*"
+    "eco": "*",
+    "coffee-script": "*",
+    "fast-detective": "*"
   },
-  "devDependencies":{
-    "mocha" : "*",
-    "should" : "*",
-    "supertest" : "*",
-    "superagent" : "*"
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.1",
+    "jqueryify": "*",
+    "spine": "*",
+    "grunt-mocha-test": "~0.6.2"
+  },
+  "readmeFilename": "README.md",
+  "gitHead": "dab41eacd3c36972baa54d3a4742fb57d032a007",
+  "description": "Target Modular Design is an alternative to Responsive Design, allowing developers to share the same code base while building app versions targeted at different screen sizes.",
+  "main": "./lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rodriguezartav/appbot-compiler"
+  },
+  "keywords": [
+    "nodejs",
+    "commonjs"
+  ],
+  "author": "Roberto Rodriguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rodriguezartav/appbot-compiler/issues"
   }
 }
