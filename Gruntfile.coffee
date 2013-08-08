@@ -2,6 +2,15 @@ module.exports = (grunt) ->
 
   
   grunt.initConfig
+    
+    clean:
+      tests: ['lib','test/unit']
+
+    copy: 
+      main: 
+        files: [ "./lib/template.eco" : "./src/template.eco" ]
+
+
     coffee:
       sourceFiles:
         expand: true,
@@ -14,7 +23,7 @@ module.exports = (grunt) ->
       testFiles:
         expand: true,
         flatten: true,
-        cwd: './test/unit/src',
+        cwd: './test/unit-src',
         src: ['*.coffee'],
         dest: './test/unit/',
         ext: '.js'
@@ -35,7 +44,10 @@ module.exports = (grunt) ->
         tasks: ["sourceFiles"]
 
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   
-  grunt.registerTask('default', ['coffee','mochaTest']);   
+  
+  grunt.registerTask('default', ['clean','coffee', "copy" , 'mochaTest']);   

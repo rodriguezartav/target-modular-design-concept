@@ -31,7 +31,14 @@ class AppModule
    ###
   constructor: (@filename, @parent) ->
     @ext = npath.extname(@filename).slice(1)
+    @details="{}"
     @id  = Utils.modulerize(@filename.replace(npath.join(@parent, npath.sep), ''))
+    
+    if fs.existsSync(@parent + "/appbotComponent.json")
+      fileContents = fs.readFileSync(@parent + "/appbotComponent.json")
+      componentInfo = JSON.parse fileContents
+      @details = fileContents
+      @id = "components/" + componentInfo.namespace + "/" + @id
 
   ###*
    * Compiles the contents of the file

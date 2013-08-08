@@ -15,13 +15,27 @@ class StyleCompiler
   
   constructor: (paths = []) ->
     @paths = paths
+    @css = ""
     
+  compile: ->
+    for module in @modules
+      try
+        compiler = Compilers.style[module.ext]
+        callback = (err,css) =>
+          throw err if err
+          @css += css
+        compiler module.path , callback
+      catch error
+        console.error err if err
+    @css = @css.replace(/(\r\n|\n|\r)/gm,"")  
+
   resolve: ->
     @resolvedModules = []
     for path in @paths
       resolvedPath = npath.resolve(path)
       @resolvedModules = @resolvedModules.concat(@walk(resolvedPath))
     
+    #flatten gets an array of arrays and converts it into an array of objects
     @modules = Utils.flatten @resolvedModules
 
   walk: (path, parent = path, result = []) ->
@@ -35,8 +49,7 @@ class StyleCompiler
         @walk(child, parent, result)
       else
         ext = npath.extname(child).slice(1)
-        compiledModule = Compilers[ext](child) if ext == "css" or ext == "less"
-        result.push(compiledModule) if compiledModule
+        result.push( { path: child , ext: ext } ) if ext == "css" or ext == "less" # or ext == "scss" or ext == "sass" or ext = "styl
     result
     
 module.exports = StyleCompiler

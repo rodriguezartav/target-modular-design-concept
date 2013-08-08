@@ -22,12 +22,13 @@ class Compiler
     @generateDepedencyModules(dependencyPaths)
     @generateStyleModules(appPaths)
     modules = @dependency.modules.concat(@app.modules)
-    compiledFile += Template(identifier: null, modules: modules, styleModules: @style.modules.join("").replace(/(\r\n|\n|\r)/gm,""))
+    compiledFile += Template(identifier: null, modules: modules, styleModules: @style.css )
     compiledFile
 
-  @generateStyleModules: (paths)->
+  @generateStyleModules: (paths) ->
     @style = new StyleCompiler(paths)
     @style.resolve()
+    @style.compile() #compiled here because of callback style of less compiler
 
   @generateDepedencyModules: (paths) ->
     @dependency = new DependencyCompiler(paths)

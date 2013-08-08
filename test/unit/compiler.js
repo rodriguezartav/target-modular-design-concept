@@ -19,26 +19,32 @@
         dependencyPaths: ["jqueryify", "spine"]
       },
       "touch": {
+        appPaths: [],
         dependencyPaths: ["spine"]
       },
       "click": {
+        appPaths: [],
         dependencyPaths: ["jqueryify", "spine"]
       },
       "socialBar": {
-        appPaths: ["test/fixtures/app/components/socialBar"]
+        appPaths: ["test/fixtures/app/components/socialBar"],
+        dependencyPaths: []
       }
     };
     it("should compile just touch resources", function() {
-      var index, str;
-      str = Compiler.generateFile(maps["mobile"]);
-      index = str.indexOf("controllers/main");
-      return str.indexOf("controllers/main").should.be.equal(-1);
+      var str;
+      str = Compiler.generateFile(maps["mobile"].appPaths, maps["mobile"].dependencyPaths);
+      return str.indexOf("controllers/main").should.not.be.equal(-1);
+    });
+    it("should compile css resources", function() {
+      var str;
+      str = Compiler.generateFile(maps["mobile"].appPaths, maps["mobile"].dependencyPaths);
+      return str.indexOf('var css=""').should.be.equal(-1);
     });
     return it("should compile just socialBar", function() {
-      var index, str;
-      str = Compiler.generateFile(maps["click"]);
-      index = str.indexOf("controllers/main");
-      return str.indexOf("controllers/main").should.be.equal(-1);
+      var str;
+      str = Compiler.generateFile(maps["socialBar"].appPaths, maps["socialBar"].dependencyPaths);
+      return str.indexOf("components/socialBar/").should.not.be.equal(-1);
     });
   });
 

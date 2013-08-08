@@ -1,7 +1,9 @@
 fs = require('fs')
 eco = require 'eco'
+less = require 'less'
 
 compilers = {}
+
 
 
 ###
@@ -55,7 +57,14 @@ require.extensions['.jeco'] = require.extensions['.eco']
 # require.extensions['.eco'] in eco package contains the function
 
 
-compilers.less= (path) ->
-    fs.readFileSync path, 'utf8'
+compilers.style =
+  css: (path,callback) ->
+    contents  = fs.readFileSync path, 'utf8'
+    callback(false,contents)
 
+  less: (path,callback) ->
+    contents = fs.readFileSync path, 'utf8'
+    less.render contents, callback
+      
+      
 module.exports = compilers
