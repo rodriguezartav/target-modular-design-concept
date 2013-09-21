@@ -66,6 +66,6 @@ compilers.style =
     lessVariablesContents = if lessVariablesPath.length > 5 then fs.readFileSync lessVariablesPath, 'utf8' else ""
     contents = fs.readFileSync path, 'utf8'
     
-    less.render contents, callback
+    less.render lessVariablesContents + contents, callback
 
 module.exports = compilers
