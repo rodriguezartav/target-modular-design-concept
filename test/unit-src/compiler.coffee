@@ -11,6 +11,8 @@ describe "Compile JS from paths" , ->
     "touch"  : appPaths: [] , dependencyPaths: ["spine"]
     "click"  : appPaths : [] , dependencyPaths: ["jqueryify","spine"]
     "socialBar" : appPaths: ["test/fixtures/app/components/socialBar"] , dependencyPaths: []
+    "socialBars" : appPaths: ["test/fixtures/app/components/socialBar","test/fixtures/app/components/socialBar2"] , dependencyPaths: []
+
   }
 
   it "should compile just touch resources" , ->
@@ -25,4 +27,8 @@ describe "Compile JS from paths" , ->
     str = Compiler.generateFile(maps["socialBar"].appPaths , maps["socialBar"].dependencyPaths)
     str.indexOf("components/socialBar/").should.not.be.equal(-1)
      
+  it "should compile css of both socialBars" , ->
+    str = Compiler.generateFile(maps["socialBars"].appPaths , maps["socialBars"].dependencyPaths)
+    str.indexOf(".test").should.not.be.equal(-1)
+    str.indexOf(".test2").should.not.be.equal(-1)
      

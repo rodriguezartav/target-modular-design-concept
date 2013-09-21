@@ -13,20 +13,21 @@ StyleCompiler = require("./styleCompiler")
 
 Utils = require("./utils")
 
+#Notice: This is not the Grunt Task, just the Compiler used by the Grunt Task
 
 class Compiler
 
-  @generateFile: (appPaths,dependencyPaths=[]) ->
+  @generateFile: (appPaths,lessVariablesPath="" ,dependencyPaths=[]) ->
     compiledFile = ""
     @generateAppModules(appPaths)
     @generateDepedencyModules(dependencyPaths)
-    @generateStyleModules(appPaths)
+    @generateStyleModules(appPaths, lessVariablesPath )
     modules = @dependency.modules.concat(@app.modules)
     compiledFile += Template(identifier: null, modules: modules, styleModules: @style.css )
     compiledFile
 
-  @generateStyleModules: (paths) ->
-    @style = new StyleCompiler(paths)
+  @generateStyleModules: (paths, lessVariablesPath) ->
+    @style = new StyleCompiler(paths, lessVariablesPath)
     @style.resolve()
     @style.compile() #compiled here because of callback style of less compiler
 

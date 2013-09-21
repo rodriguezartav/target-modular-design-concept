@@ -13,20 +13,18 @@ Compilers = require("./compilers")
 ###
 class StyleCompiler
   
-  constructor: (paths = []) ->
+  constructor: (paths = [] , lessVariablesPath) ->
     @paths = paths
+    @lessVariablesPath= lessVariablesPath
     @css = ""
     
   compile: ->
     for module in @modules
-      try
-        compiler = Compilers.style[module.ext]
-        callback = (err,css) =>
-          throw err if err
-          @css += css
-        compiler module.path , callback
-      catch error
-        console.error err if err
+      compiler = Compilers.style[module.ext]
+      callback = (err,css) =>
+        throw err if err
+        @css += css
+      compiler module.path, @lessVariablesPath, callback
     @css = @css.replace(/(\r\n|\n|\r)/gm,"")  
 
   resolve: ->

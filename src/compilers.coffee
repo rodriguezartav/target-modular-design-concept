@@ -58,13 +58,14 @@ require.extensions['.jeco'] = require.extensions['.eco']
 
 
 compilers.style =
-  css: (path,callback) ->
+  css: (path, lessVariablesPath, callback) ->
     contents  = fs.readFileSync path, 'utf8'
     callback(false,contents)
 
-  less: (path,callback) ->
+  less: (path,lessVariablesPath, callback) ->
+    lessVariablesContents = if lessVariablesPath.length > 5 then fs.readFileSync lessVariablesPath, 'utf8' else ""
     contents = fs.readFileSync path, 'utf8'
+    
     less.render contents, callback
-      
-      
+
 module.exports = compilers

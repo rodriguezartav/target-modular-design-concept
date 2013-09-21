@@ -29,6 +29,10 @@
       "socialBar": {
         appPaths: ["test/fixtures/app/components/socialBar"],
         dependencyPaths: []
+      },
+      "socialBars": {
+        appPaths: ["test/fixtures/app/components/socialBar", "test/fixtures/app/components/socialBar2"],
+        dependencyPaths: []
       }
     };
     it("should compile just touch resources", function() {
@@ -41,10 +45,16 @@
       str = Compiler.generateFile(maps["mobile"].appPaths, maps["mobile"].dependencyPaths);
       return str.indexOf('var css=""').should.be.equal(-1);
     });
-    return it("should compile just socialBar", function() {
+    it("should compile just socialBar", function() {
       var str;
       str = Compiler.generateFile(maps["socialBar"].appPaths, maps["socialBar"].dependencyPaths);
       return str.indexOf("components/socialBar/").should.not.be.equal(-1);
+    });
+    return it("should compile css of both socialBars", function() {
+      var str;
+      str = Compiler.generateFile(maps["socialBars"].appPaths, maps["socialBars"].dependencyPaths);
+      str.indexOf(".test").should.not.be.equal(-1);
+      return str.indexOf(".test2").should.not.be.equal(-1);
     });
   });
 
