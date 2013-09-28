@@ -34,11 +34,11 @@ class AppModule
     @details="{}"
     @id  = Utils.modulerize(@filename.replace(npath.join(@parent, npath.sep), ''))
     
-    if fs.existsSync(@parent + "/appbotComponent.json")
-      fileContents = fs.readFileSync(@parent + "/appbotComponent.json")
+    if fs.existsSync(@parent + "/component.json")
+      fileContents = fs.readFileSync(@parent + "/component.json")
       componentInfo = JSON.parse fileContents
       @details = fileContents
-      @id = "components/" + componentInfo.namespace + "/" + @id
+      @id =  componentInfo.namespace + "/" + componentInfo.name + "/" + @id
 
   ###*
    * Compiles the contents of the file

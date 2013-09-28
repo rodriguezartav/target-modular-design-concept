@@ -1,4 +1,0 @@
-node_modules
-/node_modules
-DS_STORE
-.DS_STORE
