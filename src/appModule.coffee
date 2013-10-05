@@ -32,12 +32,14 @@ class AppModule
   constructor: (@filename, @parent) ->
     @ext = npath.extname(@filename).slice(1)
     @details="{}"
+    @componentInfo = {}
     @id  = Utils.modulerize(@filename.replace(npath.join(@parent, npath.sep), ''))
     
     if fs.existsSync(@parent + "/component.json")
       fileContents = fs.readFileSync(@parent + "/component.json")
       componentInfo = JSON.parse fileContents
       @details = fileContents
+      @componentInfo = componentInfo
       @id =  componentInfo.namespace + "/" + componentInfo.name + "/" + @id
 
   ###*
