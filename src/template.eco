@@ -60,7 +60,7 @@
     <% for module in @modules: %>
       <% moduleId = module.componentInfo?.namespace + "/" + module.componentInfo?.name + "/" + module.componentInfo?.index  %>
        <% if moduleId == module.id: %>
-        {"path":"<%= module.id %>","iconColor": "<%= module.componentInfo.iconColor %>","iconLabel": "<%= module.componentInfo.iconLabel %>","name": "module.componentInfo.name" },
+        {"path":"<%= module.id %>","iconColor": "<%= module.componentInfo.iconColor %>","iconLabel": "<%= module.componentInfo.iconLabel %>","name": "<%= module.componentInfo.name %>" },
         <% end %>
     <% end %>
     ]
