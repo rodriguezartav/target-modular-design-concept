@@ -1,6 +1,6 @@
 {
-  "name": "appbot-compiler",
-  "version": "0.0.19",
+  "name": "r2-compiler",
+  "version": "0.0.1",
   "private": false,
   "dependencies": {
     "eco": "*",
