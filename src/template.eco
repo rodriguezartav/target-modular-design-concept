@@ -58,7 +58,7 @@
 
   var moduleList = [
     <% for module in @modules: %>
-      <% moduleId = module.componentInfo?.namespace + "/" + module.componentInfo?.name + "/" + module.componentInfo?.index  %>
+      <% moduleId = module.componentInfo?.namespace + "/" + module.componentInfo?.name + "/" + module.componentInfo?.name  %>
        <% if moduleId == module.id: %>
         {"path":"<%= module.id %>","iconColor": "<%= module.componentInfo.iconColor %>","iconLabel": "<%= module.componentInfo.iconLabel %>","label": "<%= module.componentInfo.label %>","home": <%= module.componentInfo.home or false %>},
         <% end %>
