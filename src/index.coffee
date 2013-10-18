@@ -23,6 +23,19 @@ class Compiler
     @generateDepedencyModules(dependencyPaths)
     @generateStyleModules(appPaths, lessVariablesPath )
     modules = @dependency.modules.concat(@app.modules)
+    
+    for module in modules
+      try
+        module.compilation = module.compile();
+      catch error
+        console.log("**************************")
+        console.log(module.filename);
+        console.error(error)
+        console.log("**************************")
+
+        return "console.error('R2 Compiler Error: [ " + error + " ] in " + module.filename + "')"
+
+    
     compiledFile += Template(identifier: null, modules: modules, styleModules: @style.css )
     compiledFile
 

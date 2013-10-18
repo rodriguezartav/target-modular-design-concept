@@ -52,7 +52,7 @@
   }
   return this.<%= @identifier %>.define;
 }).call(this)({
-  <%- (JSON.stringify(module.id) + ": function(exports, require, module) {#{module.compile()}}" for module in @modules).join(', ') %>
+  <%- (JSON.stringify(module.id) + ": function(exports, require, module) {#{module.compilation}}" for module in @modules).join(', ') %>
 });
 
 
@@ -60,7 +60,7 @@
     <% for module in @modules: %>
       <% moduleId = module.componentInfo?.namespace + "/" + module.componentInfo?.name + "/" + module.componentInfo?.name  %>
        <% if moduleId == module.id: %>
-        {"path":"<%= module.id %>","iconColor": "<%= module.componentInfo.iconColor %>","iconLabel": "<%= module.componentInfo.iconLabel %>","label": "<%= module.componentInfo.label %>","home": <%= module.componentInfo.home or false %>},
+        {"namespace":"<%= module.componentInfo.namespace %>","path":"<%= module.id %>","iconColor": "<%= module.componentInfo.iconColor %>","iconLabel": "<%= module.componentInfo.iconLabel %>","label": "<%= module.componentInfo.label %>","home": <%= module.componentInfo.home or false %>},
         <% end %>
     <% end %>
     ]
