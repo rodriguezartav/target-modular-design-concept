@@ -19,13 +19,17 @@ class AppCompiler
     @resolvedModules = []
     for path in @paths
       resolvedPath = npath.resolve(path)
+      if !fs.existsSync(resolvedPath)
+        console.error("PATH DOES NOT EXIST " + resolvedPath)
+        throw("PATH DOES NOT EXIST " + resolvedPath)
+
       @resolvedModules = @resolvedModules.concat(@walk(resolvedPath))
     
     @modules = Utils.flatten @resolvedModules
 
   walk: (path, parent = path, result = []) ->
     exists = fs.existsSync(path)
-    return unless exists
+    return [] unless exists
     for child in fs.readdirSync(path)
       child = npath.join(path, child)
       stat  = fs.statSync(child)

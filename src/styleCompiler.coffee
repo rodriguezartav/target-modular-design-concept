@@ -31,6 +31,10 @@ class StyleCompiler
     @resolvedModules = []
     for path in @paths
       resolvedPath = npath.resolve(path)
+      if !fs.existsSync(resolvedPath)
+        console.error("PATH DOES NOT EXIST " + resolvedPath)
+        throw("PATH DOES NOT EXIST " + resolvedPath)
+      
       @resolvedModules = @resolvedModules.concat(@walk(resolvedPath))
     
     #flatten gets an array of arrays and converts it into an array of objects
@@ -38,7 +42,7 @@ class StyleCompiler
 
   walk: (path, parent = path, result = []) ->
     exists = fs.existsSync(path)
-    return unless exists
+    return [] unless exists
     
     for child in fs.readdirSync(path)
       child = npath.join(path, child)
