@@ -40,7 +40,11 @@ class AppModule
       componentInfo = JSON.parse fileContents
       @details = fileContents
       @componentInfo = componentInfo
-      @id =  componentInfo.namespace + "/" + componentInfo.name + "/" + @id
+      if componentInfo.name.length > 0
+        @id = componentInfo.namespace + "/" + componentInfo.name + "/" + @id;              
+      else
+        @id = componentInfo.namespace + "/" + @id;
+      
 
   ###*
    * Compiles the contents of the file

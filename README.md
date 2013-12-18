@@ -1,59 +1,31 @@
-Target Modular Design is an alternative to Responsive Design, allowing developers to share the same code base while building app versions targeted at different screen sizes.
+3VOT Compiler
 
-This is experimental at the moment and used to showcase the concept in a MVOSP ( Minimum Viable Open Source Project )
+3VOT Corporation brings this amazing invention that changes the way we develop Web & Mobile Applications.
 
-Comments greatly appreciated!
+We deliver the promise of web components, spreading some developer love by eliminating all complexities related to html, js and css based components.
 
-Responsive Web Design is the first attempt to provide differentiated content for different screen sizes. It’s widely accepted and used in the web development community.
+This technologies allows developers to build web applications based on re-usable encapsulated components. This is done by grouping the design, look and functionality of any web component in a single folder.
 
-What’s the problem that Responsive Web Design is solving?
+Developers can then choose to pack several components into one JS file, that's consumed by the web application. 
 
-Responsive Web Design prevents developers from building one app version for each screen size. It saves money and time spent in building multiple web pages/apps.
-This approach is great for simple web sites where visitors watch and click on links. Anything more complex than simple web pages degrades user experience.
+This not only provides the best structure to build robust web applications, but also sets the table to load web & mobile apps much faster; since not all components need to be loaded at launch time, some of them can be packed and delivered in a way that are loaded by the application when they need it.
 
-Other than the expected diference in screen-size and layout, on mobile and tablet devices people interact with apps throught touch gestures; on desktops and laptops people interact throught the click of a mouse or pad.
+Benefits
+1. Reducing Applications Size by xx%
 
-On the one side we have touch, pinch, twist and slide; while on the other one we have click, mouse over and drag&drop.
+2. Promotes the best programming principles like encapsulation, DRY, etc.
 
-I am inventing ways to share the code base of an App and still provide targeted versions for each device.
-Proof of Concept
-The idea is to structure our App in modules and then dynamically compile just the specific modules for the target device.
+3. Exponentially increases development speed of web applications and it's components
 
-There are as many approaches to choose from as there are opportunities to improve performance. However in this example my objetive is to explain this concept, I believe a minimum viable product is the best way.
+4. Increases the effectiveness of developers by keeping related files in folders
 
-Open the Demo - click to open in Browser and also try on mobile/table
+5. Introduces a Build Process thats compatible with Testing, Q&A and Continuos Integrations
 
-Review Source Code - Important code in /compiler and /app folders
+Decisions:
+1. 3Vot Compiler is a stand-alone NPM Module used in the development context of NODE.JS
 
-Concept Review
-In this example we request an initial JS file with all the required libraries + modules that are shared by all versions independent of target device.
+2. Components are wrapper in the CommonJS specification, to share both components and structure in node.js enviroments
 
-Once that initial JS file is loaded we request another file with the specific modules for the current device. We send a query paramenter with the width of our visitor’s screen, and according to that we compile the specific modules for that screen size and complete the request.
+3. *3VOT compiler is able to load and pack NPM Modules for use in the Browser
 
-The second JS file brings all specific components and behaviors encapsulated in modules, they are used by the application to render the layout and initialize.
-
-This is probably not the best architectural design. But I’ll leave that to specific implementations and focus on explaining the concept.
-
-Request could be united or dinamically composed at runtime along with precompiling assets, requesting via CDN and loading server side templates to improve performance.
-
-Demo Code Review
-On this demo we separated our “app” into 3 sub-folders. They are /shared , /mobile and /web. The shared folder will always be included while the /mobile and /web are conditional to the vistor’s screen size.
-
-The backend dynamically compiles the correct folder (/web or /mobile) depending on the width query paramenter of the request. ie:
-
-/application.js?width=300 :::: will compile the contents of the /mobile folder /application.js?width=1000 ::will compile the /web folder
-
-By mirroring the names of modules in both /mobile and /web folders we simplify the initialisation of the frontend once it receives all of the application’s modules,
-
-ie. since the Main Controller exists and shares a name in both /web and /mobile. The App will just require(“controllers/main”) without having to know if it’s running on web or mobile.
-
-The compiler is located at /compiler folder of the source code and is could be capable of handling dependencies and named groups. ie: /applications.js?app=mobile feel free to check it out.
-
-Conclusion
-Again this a basic draft and demo of the concept, it actually makes more sense when mixed with security policies and/or user preferences.
-
-In production a similar approach that applies the concepts explained here by Alex Sexton would be necesarry.
-
-It’s important to go beyond Responsive Web Design while keeping the development “sane” and within budget, the load performance of web apps must be above acceptable levels.
-
-I don’t believe that this goals can be accomplished with a simple solution such as Responsive Web Design, we need powerfull methodologies, tools, very well written and structured code.
+4. 3VOT Compiler ATM only compiles LESS, COFFEE, JS and ECO files.

@@ -1,6 +1,6 @@
 {
-  "name": "r2-compiler",
-  "version": "0.0.6",
+  "name": "threevot-compiler",
+  "version": "0.0.2",
   "private": false,
   "dependencies": {
     "eco": "*",
@@ -19,9 +19,9 @@
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt-contrib-copy": "~0.4.1",
+    "grunt-mocha-test": "~0.6.2",
     "jqueryify": "*",
-    "rspine": "latest",
-    "grunt-mocha-test": "~0.6.2"
+    "rspine": "latest"
   },
   "readmeFilename": "README.md",
   "gitHead": "dab41eacd3c36972baa54d3a4742fb57d032a007",
